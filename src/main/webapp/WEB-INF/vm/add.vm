@@ -1,0 +1,29 @@
+<h3 style="text-align: center">申报项目申请页面</h3>
+<form action="/con1/add2"  method="post">
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <td>申报名称：</td>
+            <td><input type="text" name="projectname"></td>
+        </tr>
+        <tr>
+            <td>开始时间：</td>
+            <td><input type="date" name="startdate"></td>
+        </tr>
+        <tr>
+            <td>结束时间：</td>
+            <td><input type="date" name="enddate"></td>
+        </tr>
+        <tr>
+            <td>申报状态：</td>
+            <td><select name="status">
+                <option value="0">已申报</option>
+                <option value="1">审核中</option>
+                <option value="2">已审核</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center"> <input type="submit" value="提交">
+                <input type="button" onclick="location.href='/con1/show'" value="返回"></td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,74 @@
+<h3 style="text-align: center">申报项目列表</h3>
+<form action="/con1/show" method="post">
+    申报状态：<select name="status1">
+    <option value="">-全部-</option>
+<option   #if($!page.status1==0)
+        selected="true"
+#end
+        value="0">已申报</option>
+
+<option   #if($!page.status1==1)
+        selected="true"
+#end
+        value="1">审核中</option>
+
+<option   #if($!page.status1==2)
+        selected="true"
+#end
+        value="2">已审核</option>
+</select>
+    <input type="submit" value="查询">
+</form>
+<table class="table table-striped table-hover table-bordered">
+    <tr>
+        <td>项目编号</td>
+        <td>项目名称</td>
+        <td>开始日期</td>
+        <td>结束日期</td>
+        <td>申报状态</td>
+        <td>操作| <a href="/con1/add1">新增</a></td>
+    </tr>
+    #foreach($Pro in $list)
+        <tr>
+            <td>$!Pro.id</td>
+            <td>$!Pro.projectname</td>
+            <td>$!date.format('yyyy-MM-dd HH:mm:ss ',$!Pro.startdate)</td>
+            <td>$!date.format('yyyy-MM-dd HH:mm:ss ',$!Pro.enddate)</td>
+            <td>$!Pro.pro.name</td>
+            <td>#if($!Pro.status<2) <strong><a href="/con1/show1?id=$!Pro.id">审核</a></strong>
+#end</td>
+        </tr>
+    #end
+
+</table >
+#set ($arr=[1..$page.totalPage])
+
+<div style="text-align: center">
+    <ul class="pagination"  id="fy">
+        <li class=""><a href="javascript:goPage(1)">首页</a></li>
+        <li><a href="javascript:goPage($page.getCurrPage()-1)">&laquo;</a></li>
+        #foreach($a in $arr)
+            <li
+                #if($a==$page.currPage)
+                        class="active"
+                #end
+            ><a href="javascript:goPage($a)">$a</a></li>
+        #end
+        <li><a href="javascript:goPage($page.currPage+1)">&raquo;</a></li>
+        <li><a href="javascript:goPage($page.totalPage)">尾页</a></li>
+
+    </ul>
+</div>
+
+<script>
+
+    function goPage(p) {
+        if(p>$page.totalPage){
+            p=$page.totalPage
+        }
+        if(p<1){
+            p=1;
+        }
+        location.href="/con1/show?currPage="+p;
+    }
+</script>
